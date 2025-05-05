@@ -33,30 +33,48 @@ def modquit():
 
 def listen():
     global z, x, perz, perx, apphold
+    z_down = False
+    x_down = False
     while running:
         try:
             if kb.is_pressed('z'):
-                pg.rightClick()
-                perz += 1
-                z += 1
-            elif kb.is_pressed('x'):
-                pg.leftClick()
-                perx += 1
-                x += 1
-            elif kb.is_pressed('`'):
-                global apphold
+                if not z_down:
+                    pg.mouseDown(button='right')
+                    z_down = True
+                    perz += 1
+                    z += 1
+            else:
+                if z_down:
+                    pg.mouseUp(button='right')
+                    z_down = False
+
+            if kb.is_pressed('x'):
+                if not x_down:
+                    pg.mouseDown(button='left')
+                    x_down = True
+                    perx += 1
+                    x += 1
+            else:
+                if x_down:
+                    pg.mouseUp(button='left')
+                    x_down = False
+
+            if kb.is_pressed('`'):
                 if apphold:
                     keydeystroyer()
                     apphold = False
                 else:
                     keyholder() 
                     apphold = True
-            elif kb.is_pressed('q'):
+
+            if kb.is_pressed('q'):
                 modquit()
                 root.quit()
                 break
+
         except RuntimeError:
             break
+
 
 def reset():
     global perz, perx, hostperz, hostperx
