@@ -17,7 +17,9 @@ Press Z (or Hold) : 좌클릭
 Press X (or Hold) : 우클릭
 
 
-Press ` : 입력방지 토글 활성화/비활성화
+Press ` : 입력방지 (토글)
 
+
+Press shift+c : 프로그램 일시 중지 (토글)
 
 Press alt+shift+q : 프로그램 중지
