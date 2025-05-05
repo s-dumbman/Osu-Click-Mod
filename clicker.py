@@ -69,14 +69,13 @@ def reset():
         perx = 0
         sleep(1)
 
-def update_gui(label_perz, label_perx, label_z, label_x, is_hold):
+def update_gui(label_perz, label_perx, label_z, label_x):
     label_perz.config(text=f"z cps: {perz} (최고 : {hostperz})")
     label_perx.config(text=f"x cps: {perx} (최고 : {hostperx})")
     label_z.config(text=f"z 클릭수: {z}")
     label_x.config(text=f"x 클릭수: {x}")
-    is_hold.config(text=f"입력방지 : {'켜짐' if apphold else '꺼짐'}")
     if running:
-        root.after(10, update_gui, label_perz, label_perx, label_z, label_x, is_hold)
+        root.after(10, update_gui, label_perz, label_perx, label_z, label_x)
 
 def pygui():
     global perz, perx, hostperx, hostperz, running, apphold
@@ -96,11 +95,8 @@ def pygui():
 
     label_hostperx = tk.Label(root, text=f"hostperx: {hostperx}", font=("Arial", 10))
     label_hostperx.pack(pady=5)
-
-    is_hold = tk.Label(root, text=f"입력방지 : {'꺼짐' if apphold else '켜짐'}", font=("Arial", 10))
-    is_hold.pack(pady=5)
     
-    update_gui(label_perz, label_perx, label_hostperz, label_hostperx, is_hold)
+    update_gui(label_perz, label_perx, label_hostperz, label_hostperx)
     
     threading.Thread(target=listen, daemon=True).start()
     threading.Thread(target=reset, daemon=True).start()
