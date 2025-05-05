@@ -67,7 +67,7 @@ def listen():
                     keyholder() 
                     apphold = True
 
-            if kb.is_pressed('q'):
+            if kb.is_pressed('alt+shift+q'):
                 modquit()
                 root.quit()
                 break
