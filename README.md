@@ -17,4 +17,4 @@ Press X : 우클릭
 Press ` : 입력방지 토글 활성화/비활성화
 
 
-Press q : 프로그램 중지
+Press alt+shift : 프로그램 중지
