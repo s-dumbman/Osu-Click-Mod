@@ -14,6 +14,7 @@ hostperz = 0
 hostperx = 0
 running = True
 apphold = False
+grass = False
 
 kb.block_key('`')
 
@@ -32,40 +33,58 @@ def modquit():
     running = False
 
 def listen():
-    global z, x, perz, perx, apphold
+    global z, x, perz, perx, apphold, grass
     z_down = False
     x_down = False
     while running:
         try:
-            if kb.is_pressed('z'):
-                if not z_down:
-                    pg.mouseDown(button='right')
-                    z_down = True
-                    perz += 1
-                    z += 1
-            else:
-                if z_down:
-                    pg.mouseUp(button='right')
-                    z_down = False
-
-            if kb.is_pressed('x'):
-                if not x_down:
-                    pg.mouseDown(button='left')
-                    x_down = True
-                    perx += 1
-                    x += 1
-            else:
-                if x_down:
-                    pg.mouseUp(button='left')
-                    x_down = False
-
-            if kb.is_pressed('`'):
-                if apphold:
-                    keydeystroyer()
-                    apphold = False
+            if grass == False:
+                if kb.is_pressed('z'):
+                    if not z_down:
+                        pg.mouseDown(button='right')
+                        z_down = True
+                        perz += 1
+                        z += 1
                 else:
-                    keyholder() 
-                    apphold = True
+                    if z_down:
+                        pg.mouseUp(button='right')
+                        z_down = False
+
+                if kb.is_pressed('x'):
+                    if not x_down:
+                        pg.mouseDown(button='left')
+                        x_down = True
+                        perx += 1
+                        x += 1
+                else:
+                    if x_down:
+                        pg.mouseUp(button='left')
+                        x_down = False
+
+                if kb.is_pressed('`'):
+                    if apphold:
+                        keydeystroyer()
+                        apphold = False
+                        print("key deystroyer on")
+                        sleep(0.1)
+                    else:
+                        keyholder() 
+                        apphold = True
+                        print("key deystroyer off")
+                        sleep(0.1)
+            else:
+                pass
+            
+            if kb.is_pressed('shift') and kb.is_pressed('c'):
+                if grass == True:
+                    grass = False
+                    print("grass off")
+                    sleep(0.1)
+                else:
+                    grass = True
+                    print("grass on")
+                    sleep(0.1)
+
 
             if kb.is_pressed('alt+shift+q'):
                 modquit()
