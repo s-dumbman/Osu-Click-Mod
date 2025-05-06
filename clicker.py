@@ -32,6 +32,9 @@ def modquit():
     print(f'hostperz : {hostperz}, hostperx : {hostperx}')
     running = False
 
+def selfsleep():
+    sleep(0.25)
+
 def listen():
     global z, x, perz, perx, apphold, grass
     z_down = False
@@ -66,12 +69,12 @@ def listen():
                         keydeystroyer()
                         apphold = False
                         print("key deystroyer on")
-                        sleep(0.1)
+                        selfsleep()
                     else:
                         keyholder() 
                         apphold = True
                         print("key deystroyer off")
-                        sleep(0.1)
+                        selfsleep()
             else:
                 pass
             
@@ -79,11 +82,11 @@ def listen():
                 if grass == True:
                     grass = False
                     print("grass off")
-                    sleep(0.1)
+                    selfsleep()
                 else:
                     grass = True
                     print("grass on")
-                    sleep(0.1)
+                    selfsleep()
 
 
             if kb.is_pressed('alt+shift+q'):
