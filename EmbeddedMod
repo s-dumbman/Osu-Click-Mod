@@ -1,0 +1,81 @@
+# for minesweeper causal / hexceed
+# for making any clicker game stylish
+# for increasing performance
+import keyboard as kb
+import pyautogui as pg
+from time import *
+
+running = True
+apphold = False
+grass = False
+
+kb.block_key('`')
+
+def keydeystroyer():
+    kb.block_key('z')
+    kb.block_key('x')
+
+def keyholder():
+    kb.unhook_all()
+
+def modquit():
+    global running
+    running = False
+
+def selfsleep():
+    sleep(0.25)
+
+def listen():
+    global apphold, grass
+    z_down = False
+    x_down = False
+    while running:
+        try:
+            if grass == False:
+                if kb.is_pressed('z'):
+                    if not z_down:
+                        pg.mouseDown(button='right')
+                        z_down = True
+                else:
+                    if z_down:
+                        pg.mouseUp(button='right')
+                        z_down = False
+
+                if kb.is_pressed('x'):
+                    if not x_down:
+                        pg.mouseDown(button='left')
+                        x_down = True
+                else:
+                    if x_down:
+                        pg.mouseUp(button='left')
+                        x_down = False
+
+                if kb.is_pressed('`'):
+                    if apphold:
+                        keydeystroyer()
+                        apphold = False
+                        selfsleep()
+                    else:
+                        keyholder() 
+                        apphold = True
+                        selfsleep()
+            else:
+                pass
+            
+            if kb.is_pressed('shift') and kb.is_pressed('c'):
+                kb.press('backspace')
+                if grass == True:
+                    grass = False
+                    selfsleep()
+                else:
+                    grass = True
+                    selfsleep()
+
+
+            if kb.is_pressed('alt+shift+q'):
+                modquit()
+                break
+
+        except RuntimeError:
+            break
+listen()
